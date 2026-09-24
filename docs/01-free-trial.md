@@ -23,7 +23,12 @@ Official page: <https://cloud.google.com/free/docs/free-cloud-features>
      It is not a charge. It disappears after 1 to 14 business days depending on your bank.
    - In some countries Google also asks you to verify your bank account.
    - Virtual or prepaid cards are sometimes refused. Use a regular card if that happens.
-4. Click **Start free**. You land in the Google Cloud Console with a **Billing account** that holds
+
+   > **Heads-up: you may be asked for a small prepayment.** Some accounts are asked to add about
+   > **$10 / 10 EUR** to the billing account before the trial activates (it happened to us). It is not in
+   > Google's official terms, so not everyone sees it. If you do, it is a prepayment credited to your account,
+   > not a fee.
+4. Click **Start free**. The $300 is valid for **90 days** from this moment. You land in the Google Cloud Console with a **Billing account** that holds
    your $300 credit, and usually a first project called "My First Project".
 
 ## Check it worked

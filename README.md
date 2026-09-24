@@ -16,7 +16,8 @@ models on **Vertex AI**: Gemini 3.8, Nano Banana images, Veo 3.1 video with soun
 Most people never touch it, because the path from "free credit" to "an API my tools can call" is
 buried in cloud jargon. This repo is that path, tested end to end:
 
-1. **Claim the credit** (5 min, a card is required, nothing is charged during the trial)
+1. **Claim the credit** (5 min, a card is required, nothing is charged during the trial, valid **90 days**.
+   Heads-up: some accounts are asked for a ~$10 prepayment, [details](docs/01-free-trial.md#sign-up))
 2. **Set up Vertex AI** (10 min, clicks or 5 commands)
 3. **Run a tiny proxy** that turns your Google project into one simple API
 4. **Plug it into n8n, your apps, any OpenAI-compatible tool**

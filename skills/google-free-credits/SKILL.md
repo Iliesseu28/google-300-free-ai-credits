@@ -34,6 +34,8 @@ Ask, in one message:
 Read `docs/01-free-trial.md`. Give the user the link <https://console.cloud.google.com/freetrial> and the
 three facts that reassure: a card is required, Google only places a $0 to $1 temporary authorization, and
 nothing is charged during the trial.
+Warn them that some accounts are asked for a ~$10 / 10 EUR prepayment before activation (not in
+Google's official terms, but it happens), and that the credit expires 90 days after sign-up.
 
 Check: the user sees about $300 under **Billing, Credits**. Ask them for the expiry date and remind them of it
 at the end.
