@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r proxy/requirements.txt pytest
+      - run: pytest -q tests
+      - name: Docker image builds
+        run: docker build -t vertex-proxy ./proxy
+      - name: Container starts and answers /health
+        run: |
+          docker run -d --name vp --read-only --tmpfs /tmp -p 8080:8080 \
+            -e GOOGLE_CLOUD_PROJECT=ci -e PROXY_API_KEYS=ci-key vertex-proxy
+          for i in $(seq 1 20); do curl -fsS localhost:8080/health && exit 0; sleep 1; done
+          docker logs vp; exit 1

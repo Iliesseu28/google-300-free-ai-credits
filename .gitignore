@@ -1,0 +1,17 @@
+.env
+secrets/
+*.json.key
+service-account*.json
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+out/
+*.png
+*.wav
+*.mp3
+video.json
+!docs/**
+*.mp4
+*.wav
+.DS_Store
