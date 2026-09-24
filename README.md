@@ -8,7 +8,7 @@
 ![OpenAI compatible](https://img.shields.io/badge/API-OpenAI%20compatible-10a37f)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-<p align="center"><img src="docs/social-preview.png" alt="$300 of free Google AI: Gemini text, images, voice and Veo video, plugged into n8n and your apps" width="820"></p>
+<p align="center"><a href="docs/assets/promo.mp4"><img src="docs/social-preview.png" alt="$300 of free Google AI: Gemini text, images, voice and Veo video, plugged into n8n and your apps" width="820"></a><br><a href="docs/assets/promo.mp4"><b>▶ Watch the 30-second video</b></a></p>
 
 Every new Google Cloud account gets **$300 of credit for 90 days**. That credit pays for Google's best AI
 models on **Vertex AI**: Gemini 3.8, Nano Banana images, Veo 3.1 video with sound, natural voices.

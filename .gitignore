@@ -11,7 +11,7 @@ out/
 *.wav
 *.mp3
 video.json
-!docs/**
 *.mp4
 *.wav
 .DS_Store
+!docs/**
