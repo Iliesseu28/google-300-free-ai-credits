@@ -6,8 +6,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 
 # Never run as root.
-RUN useradd --system --uid 10001 proxy
-USER proxy
+RUN useradd --system --uid 10001 vertexproxy
+USER vertexproxy
 
 ENV PORT=8080
 EXPOSE 8080
