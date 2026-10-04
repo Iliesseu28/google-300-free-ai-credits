@@ -6,10 +6,10 @@ Time: 5 minutes. Cost: $0.
 
 | | |
 |---|---|
-| Credit | **$300**, usable on most Google Cloud products, including Vertex AI (Gemini, Imagen, Veo, TTS) |
+| Credit | **$300**, usable on most Google Cloud products, including Vertex AI (Gemini, Nano Banana, Veo, TTS) |
 | Duration | **90 days** from sign-up, or until the $300 is spent, whichever comes first |
 | Who | Anyone who has **never** been a paying customer of Google Cloud, Google Maps Platform or Firebase, and never had the free trial before |
-| Surprise bills | None. During the trial Google **does not charge you**. When the credit or the 90 days run out, the trial simply stops |
+| Surprise bills | None **as long as you stay on the trial**: Google does not charge you, and when the credit or the 90 days run out, the trial simply stops. One click on **Activate** ends that protection (see below) |
 
 Official page: <https://cloud.google.com/free/docs/free-cloud-features>
 
@@ -34,7 +34,7 @@ Official page: <https://cloud.google.com/free/docs/free-cloud-features>
 ## Check it worked
 
 Console, menu **Billing** then **Credits**: you should see the Free Trial credit with about $300 remaining
-and the expiry date. Write that date down.
+and the expiry date. Write that date down: you need it for the budget alert in step 2.
 
 ## Good to know before you start
 
@@ -42,12 +42,17 @@ and the expiry date. Write that date down.
   can't pay for Gemini API in AI Studio costs."* An API key from aistudio.google.com draws on a separate
   quota and billing. That is exactly why this repo goes through **Vertex AI**.
 - **Third-party models are excluded.** Claude, Llama, Mistral and other partner models sold on Vertex's
-  Model Garden as managed APIs cannot be paid with the credit. Google's own models (Gemini, Imagen, Veo,
+  Model Garden as managed APIs cannot be paid with the credit. Google's own models (Gemini, Veo,
   Gemini TTS, Chirp) can.
 - **Trial limits:** no GPUs on virtual machines, no quota increase requests. The default quotas are enough
   for personal projects and automations, but image generation is limited to a few images per minute.
   See [troubleshooting](08-troubleshooting.md) for how the proxy deals with it.
-- **Upgrading to a paid account is optional.** If you upgrade, the remaining credit stays usable until the
-  original 90-day date, and after that you pay normally. See [When the credit runs out](09-when-credits-run-out.md).
+- **Do not click Activate by accident.** The Console shows an **Activate** (or **Activate full account**)
+  button on many pages. One click makes the account a paid one: the remaining credit is still used first,
+  then everything is billed to your card, with no stop. Our account became a paid one in the middle of the
+  trial while we still believed we were on it, and Google billed about 90 EUR once the credit was gone.
+  Check **Billing**, **Overview** from time to time: it must still show the free trial and the days left.
+- **Upgrading on purpose is fine.** The remaining credit stays usable until the original 90-day date, and
+  after that you pay normally. See [When the credit runs out](09-when-credits-run-out.md).
 
 Next: [Step 2. Set up Vertex AI](02-google-cloud-setup.md)

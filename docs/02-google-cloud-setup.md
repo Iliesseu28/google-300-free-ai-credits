@@ -1,7 +1,7 @@
 # Step 2. Set up Vertex AI and a service account
 
-Time: 10 minutes. Two ways to do the same thing: **clicks in the Console** or **5 commands with gcloud**.
-Pick one.
+Time: 10 minutes. Two ways to do the same thing: **clicks in the Console** or **a few commands with gcloud**.
+Pick one. Then set the budget alerts at the end of this page: it takes 2 minutes and it is not optional.
 
 What you create:
 
@@ -40,7 +40,7 @@ it cannot delete your project, read your files or change billing.
 Some organizations block key creation (policy `iam.disableServiceAccountKeyCreation`). A personal free-trial
 account normally does not. If you hit it, use Option C.
 
-## Option B. With gcloud (5 commands)
+## Option B. With gcloud
 
 Install the Google Cloud CLI: <https://cloud.google.com/sdk/docs/install>. Then:
 
@@ -50,8 +50,9 @@ gcloud billing accounts list                # note the ACCOUNT_ID of the Free Tr
 
 export PROJECT=my-ai-credits-$RANDOM
 gcloud projects create $PROJECT --name="My AI credits"
+gcloud config set project $PROJECT
 gcloud billing projects link $PROJECT --billing-account=<ACCOUNT_ID>
-gcloud services enable aiplatform.googleapis.com --project=$PROJECT
+gcloud services enable aiplatform.googleapis.com billingbudgets.googleapis.com --project=$PROJECT
 
 gcloud iam service-accounts create vertex-proxy --display-name="Vertex proxy" --project=$PROJECT
 gcloud projects add-iam-policy-binding $PROJECT \
@@ -89,5 +90,44 @@ curl -s -X POST \
 A JSON answer with `"text": "OK"` means you are ready. An error? See [troubleshooting](08-troubleshooting.md).
 
 Note: a brand new key or role can take about a minute to work. A 401 or 403 in the first minute is normal.
+
+In zsh (the default shell on macOS), if you put the model in a variable, write `${MODEL}:generateContent`
+with braces. Without them zsh reads `:g...` as a modifier and silently breaks the URL.
+
+## Set a budget alert now
+
+A budget sends an email to the billing account's owner when spending crosses a threshold. It stops nothing,
+but it is the only warning you will get. Create two:
+
+| Budget | Counts | Why |
+|---|---|---|
+| **Real bill** | spending **after** credits, 5 per month | Must stay at 0. An email means your card is paying |
+| **Credit burn** | spending **before** credits, from today to the trial end date | Tells you how fast the $300 goes |
+
+**In the Console:** menu **Billing**, **Budgets & alerts**, **Create budget**. Scope it to your project.
+For the credit burn budget, untick the credits in the **Credits** section so it counts usage before credits.
+
+**With gcloud:** use your billing account's currency (`5USD`, or `5EUR` for an account in euros; in euros,
+the credit is worth about 260).
+
+```bash
+BILLING=<ACCOUNT_ID>   # the Free Trial billing account from Option B
+
+gcloud billing budgets create --billing-account=$BILLING \
+  --display-name="Real bill (after credits)" --budget-amount=5USD \
+  --filter-projects=projects/$PROJECT --calendar-period=month \
+  --threshold-rule=percent=0.5 --threshold-rule=percent=1.0
+
+gcloud billing budgets create --billing-account=$BILLING \
+  --display-name="Free trial credit burn" --budget-amount=300USD \
+  --credit-types-treatment=exclude-all-credits \
+  --filter-projects=projects/$PROJECT \
+  --start-date=$(date +%F) --end-date=<TRIAL_END_DATE_YYYY-MM-DD> \
+  --threshold-rule=percent=0.25 --threshold-rule=percent=0.5 \
+  --threshold-rule=percent=0.75 --threshold-rule=percent=0.9
+```
+
+If the "Real bill" email ever arrives, your account is no longer on the free trial: read
+[When the credit runs out](09-when-credits-run-out.md#what-happens-if-the-account-was-upgraded-even-by-accident).
 
 Next: [Step 3. Run the proxy](03-run-the-proxy.md)

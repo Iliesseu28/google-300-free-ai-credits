@@ -63,7 +63,7 @@ curl -s "$PROXY/v1/image?binary=1" -H "X-API-Key: $KEY" -H "Content-Type: applic
 | Field | Default | Notes |
 |---|---|---|
 | `prompt` | required | |
-| `model` | `gemini-3.1-flash-image` | or `gemini-3.1-flash-lite-image` (cheaper), `imagen-4.0-generate-001`, `imagen-4.0-fast-generate-001` |
+| `model` | `gemini-3.1-flash-image` | or `gemini-3.1-flash-lite-image` (half the price, best for volume) |
 | `aspect_ratio` | `1:1` | `16:9`, `9:16`, `4:3`, `3:4` |
 
 A `422` means Google returned no image, almost always a safety filter. Rephrase the prompt.

@@ -33,12 +33,13 @@ Ask, in one message:
 
 Read `docs/01-free-trial.md`. Give the user the link <https://console.cloud.google.com/freetrial> and the
 three facts that reassure: a card is required, Google only places a $0 to $1 temporary authorization, and
-nothing is charged during the trial.
+nothing is charged as long as they stay on the trial. Tell them clearly to never click **Activate** in the
+Console unless they want to pay: one click turns the account into a paid one, with no stop.
 Warn them that some accounts are asked for a ~$10 / 10 EUR prepayment before activation (not in
 Google's official terms, but it happens), and that the credit expires 90 days after sign-up.
 
-Check: the user sees about $300 under **Billing, Credits**. Ask them for the expiry date and remind them of it
-at the end.
+Check: the user sees about $300 under **Billing, Credits**. Ask them for the expiry date (you need it for the
+credit burn budget in stage 2) and remind them of it at the end.
 
 ## Stage 2. Project, API, service account
 
@@ -53,6 +54,10 @@ Read `docs/02-google-cloud-setup.md`.
 
 Check: run the "Test before going further" curl from docs/02 (needs gcloud), or skip to the proxy
 smoke test in stage 3. A 401/403 in the first minute after creating the key is normal: wait 60 s.
+
+Then create the two budgets of "Set a budget alert now" in docs/02 (gcloud), or walk the user through the
+Console. Do not skip it: it is the only warning if the account ever starts billing the card.
+Check: `gcloud billing budgets list --billing-account=<ACCOUNT_ID>` shows both.
 
 ## Stage 3. Run the proxy
 
@@ -82,7 +87,7 @@ Check: one real output produced for the user's use case (a reply, a PNG, a WAV o
 Tell the user, briefly:
 - where the proxy runs and its URL, where `.env` and `secrets/` are (and that they must never be committed);
 - the trial expiry date, and `docs/07-models-and-prices.md` for what the credit buys;
-- to set a budget alert (Billing, Budgets & alerts);
+- that the two budgets will email them, and to never click **Activate** unless they mean to pay;
 - `docs/09-when-credits-run-out.md` for what happens after 90 days.
 
 ## When something fails

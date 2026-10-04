@@ -31,7 +31,7 @@ API_KEYS = [k.strip() for k in os.environ.get("PROXY_API_KEYS", "").split(",") i
 
 # Gemini 3.x text and image models only answer on the "global" location.
 TEXT_LOCATION = os.environ.get("TEXT_LOCATION", "global")
-# Veo, Imagen and TTS models live in regional locations.
+# Veo and TTS models (and Imagen, for projects that still have it) live in regional locations.
 MEDIA_LOCATION = os.environ.get("MEDIA_LOCATION", "us-central1")
 
 DEFAULT_TEXT_MODEL = os.environ.get("DEFAULT_TEXT_MODEL", "gemini-3.8-flash")
@@ -47,12 +47,11 @@ HTTP_TIMEOUT = int(os.environ.get("HTTP_TIMEOUT", "300"))
 KNOWN_MODELS = [
     "gemini-3.8-flash",
     "gemini-3.7-flash",
+    "gemini-3.5-flash-lite",
     "gemini-3.1-flash-lite",
     "gemini-3.1-pro-preview",
     "gemini-3.1-flash-image",
     "gemini-3.1-flash-lite-image",
-    "imagen-4.0-generate-001",
-    "imagen-4.0-fast-generate-001",
     "gemini-2.5-flash-tts",
     "gemini-3.1-flash-tts-preview",
     "veo-3.1-lite-generate-001",

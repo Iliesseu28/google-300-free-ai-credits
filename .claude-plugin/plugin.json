@@ -1,7 +1,7 @@
 {
   "name": "google-free-credits",
   "version": "1.0.0",
-  "description": "Step-by-step guide an AI agent follows to claim the $300 Google Cloud credit, set up Vertex AI and deploy a proxy for Gemini, Imagen, TTS and Veo",
+  "description": "Step-by-step guide an AI agent follows to claim the $300 Google Cloud credit, set up Vertex AI and deploy a proxy for Gemini, Nano Banana images, TTS and Veo",
   "author": {
     "name": "Iliesseu28",
     "email": "iliesseu28@users.noreply.github.com"
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/Iliesseu28/google-300-free-ai-credits",
   "repository": "https://github.com/Iliesseu28/google-300-free-ai-credits",
   "license": "MIT",
-  "keywords": ["google-cloud", "vertex-ai", "gemini", "veo", "free-credits", "n8n", "proxy", "tts", "imagen"]
+  "keywords": ["google-cloud", "vertex-ai", "gemini", "veo", "free-credits", "n8n", "proxy", "tts", "nano-banana"]
 }

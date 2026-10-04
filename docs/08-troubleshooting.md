@@ -4,8 +4,10 @@ Every entry below happened to us in production, with the fix that worked.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| **404** `Publisher model ... was not found` | Wrong location. Gemini 3.x text and image models only exist on `global`. Veo, Imagen and TTS live in regions (`us-central1`) | Keep the defaults: `TEXT_LOCATION=global`, `MEDIA_LOCATION=us-central1`. The proxy routes each model for you |
+| **404** `Publisher model ... was not found` | Wrong location. Gemini 3.x text and image models only exist on `global`. Veo and TTS live in regions (`us-central1`) | Keep the defaults: `TEXT_LOCATION=global`, `MEDIA_LOCATION=us-central1`. The proxy routes each model for you |
 | **404** on a model name you read somewhere | The name does not exist (preview names change, `-preview` suffixes disappear) | Test names with the curl in [step 2](02-google-cloud-setup.md#test-before-going-further). Don't guess: the list in [prices](07-models-and-prices.md) was tested |
+| **404** on `imagen-4.0-*` | Google no longer serves Imagen 4 to new projects (checked October 4, 2026) | Use `gemini-3.1-flash-lite-image` (cheaper) or `gemini-3.1-flash-image` |
+| **404** or empty answer only in **zsh**, URL built as `.../models/$MODEL:generateContent` | zsh reads `:g...` after a variable as a modifier and breaks the URL | Write `${MODEL}:generateContent` with braces, or run the script with bash |
 | **403** `aiplatform.endpoints.predict` denied | Missing role, API not enabled, or gcloud logged in with another Google account | Check the service account has **Vertex AI User** on the right project. On your computer: `gcloud config get-value account` |
 | **401 / 403 right after creating a key** | IAM changes take up to a minute to spread | Wait 60 s, retry |
 | **403** `billing` / `BILLING_DISABLED` | Project not linked to the billing account with the credit | Console, Billing, link the project |
@@ -19,6 +21,7 @@ Every entry below happened to us in production, with the fix that worked.
 | n8n: **ECONNREFUSED** / `fetch failed` | n8n cannot reach the proxy | Same Docker network and `http://vertex-proxy:8080`, or `host.docker.internal`. From a container, `localhost` is the container itself |
 | Proxy key rejected (**401**) | Key typo, or `PROXY_API_KEYS` changed without restart | Restart the container after editing `.env` |
 | Worked yesterday, **403** today | Free trial ended (90 days or $300 spent) | See [When the credit runs out](09-when-credits-run-out.md) |
+| **Billed** although you thought you were on the trial | The account was upgraded to paid (one click on **Activate**). Google never does it by itself | Stop all spending now: `gcloud billing projects unlink $PROJECT`. Then see [When the credit runs out](09-when-credits-run-out.md#what-happens-if-the-account-was-upgraded-even-by-accident) |
 
 ## Security checklist
 
@@ -27,5 +30,5 @@ Every entry below happened to us in production, with the fix that worked.
 - One proxy key per app or workflow. Revoke one by removing it from `PROXY_API_KEYS` and restarting.
 - Never put the proxy key in a mobile app or a website's JavaScript. Call the proxy from a backend.
 - Expose the proxy only behind HTTPS, or not at all (same Docker network as n8n).
-- Set a **budget alert** (Billing, Budgets & alerts) even during the trial: it tells you how fast you burn
-  the credit.
+- Set the two **budget alerts** from [step 2](02-google-cloud-setup.md#set-a-budget-alert-now) on day one,
+  even during the trial: one tells you how fast you burn the credit, the other that your card is paying.

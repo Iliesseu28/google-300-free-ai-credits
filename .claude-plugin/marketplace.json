@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "google-free-credits",
-      "description": "Step-by-step guide an AI agent follows to claim the $300 Google Cloud credit, set up Vertex AI and deploy a proxy for Gemini, Imagen, TTS and Veo",
+      "description": "Step-by-step guide an AI agent follows to claim the $300 Google Cloud credit, set up Vertex AI and deploy a proxy for Gemini, Nano Banana images, TTS and Veo",
       "source": "./",
       "category": "productivity"
     }
